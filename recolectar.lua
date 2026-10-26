@@ -17,6 +17,7 @@ function Recolectar.load()
     sonidoDerrota = love.audio.newSource("derrota.mp3", "static")
 end
 
+
 function Recolectar.enter()
     jugador = { x = 400, y = 300, ancho = 32, alto = 32, velocidad = 250 }
     enemigo = { x = 100, y = 100, ancho = 30, alto = 30, velocidad = 90 }

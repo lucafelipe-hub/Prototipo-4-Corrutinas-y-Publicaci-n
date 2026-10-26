@@ -31,6 +31,7 @@ function Destruir.load()
         if sndDisparo then sndDisparo:clone():play() end
     end)
 
+    
     Eventos.suscribir("enemigo_destruido", function(pts)
         puntos = puntos + pts
         if sndMoneda then sndMoneda:clone():play() end
