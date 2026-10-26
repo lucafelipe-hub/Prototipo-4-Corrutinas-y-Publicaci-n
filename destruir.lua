@@ -15,7 +15,7 @@ local colorFeedback = {1, 1, 1}
 local miCorrutina = nil
 local temporizadorCorrutina = 0
 
--- Variable para avisarle al main.lua que queremos volver al menú principal
+
 Destruir.volverMenu = false
 
 function Destruir.load()
@@ -171,13 +171,13 @@ end
 
 function Destruir.mousepressed(x, y, button)
     if (estadoJuego == "GAME_OVER" or estadoJuego == "VICTORIA") and button == 1 then
-        -- 1. Botón REINICIAR (Verde: Y entre 320 y 370)
+        -- 1. Botón REINICIAR
         if x >= 300 and x <= 500 and y >= 320 and y <= 370 then
             Destruir.enter()
-        -- 2. Botón VOLVER (Azul/Celeste: Y entre 390 y 440)
+        -- 2. Botón VOLVER
         elseif x >= 300 and x <= 500 and y >= 390 and y <= 440 then
             Destruir.volverMenu = true
-        -- 3. Botón SALIR (Rojo: Y entre 460 y 510)
+        -- 3. Botón SALIR 
         elseif x >= 300 and x <= 500 and y >= 460 and y <= 510 then
             love.event.quit()
         end
@@ -216,7 +216,7 @@ function Destruir.draw()
     love.graphics.setColor(colorFeedback)
     love.graphics.print(textoFeedback, 380, 22)
 
-    -- Pantallas Finales con los 3 Botones
+    -- Pantallas Finales con 3 Botones
     if estadoJuego == "GAME_OVER" or estadoJuego == "VICTORIA" then
         love.graphics.setColor(0, 0, 0, 0.85)
         love.graphics.rectangle("fill", 0, 0, 800, 600)
@@ -232,19 +232,19 @@ function Destruir.draw()
         love.graphics.setColor(1, 1, 1)
         love.graphics.printf("Puntuación Final: " .. puntos, 0, 220, 800, "center")
 
-        -- 1. Botón REINICIAR (Verde)
+        -- 1. Botón REINICIAR
         love.graphics.setColor(0.1, 0.7, 0.2)
         love.graphics.rectangle("fill", 300, 320, 200, 45, 8, 8)
         love.graphics.setColor(1, 1, 1)
         love.graphics.printf("REINICIAR", 300, 333, 200, "center")
 
-        -- 2. Botón VOLVER (Azul / Celeste)
+        -- 2. Botón VOLVER
         love.graphics.setColor(0.1, 0.5, 0.8)
         love.graphics.rectangle("fill", 300, 390, 200, 45, 8, 8)
         love.graphics.setColor(1, 1, 1)
         love.graphics.printf("VOLVER", 300, 403, 200, "center")
 
-        -- 3. Botón SALIR (Rojo)
+        -- 3. Botón SALIR
         love.graphics.setColor(0.8, 0.2, 0.2)
         love.graphics.rectangle("fill", 300, 460, 200, 45, 8, 8)
         love.graphics.setColor(1, 1, 1)

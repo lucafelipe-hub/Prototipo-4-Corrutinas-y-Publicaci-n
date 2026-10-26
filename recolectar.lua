@@ -5,14 +5,12 @@ local puntuacion, objetivoPuntos, estadoJuego
 local imagenAvion, imagenEnemigo
 local sonidoCoin, sonidoDisparo, sonidoVictoria, sonidoDerrota
 
--- Variable para avisarle al main.lua que queremos volver al menú principal
 Recolectar.volverMenu = false
 
 function Recolectar.load()
     imagenAvion = love.graphics.newImage("avion.png")
     imagenEnemigo = love.graphics.newImage("enemigo.png")
     
-    -- Carga estática de todos los sonidos necesarios
     sonidoCoin = love.audio.newSource("moneda.mp3", "static")
     sonidoDisparo = love.audio.newSource("disparo.mp3", "static")
     sonidoVictoria = love.audio.newSource("victoria.mp3", "static")
@@ -62,7 +60,7 @@ function Recolectar.update(dt)
         end
     end
 
-    -- Colisión con coleccionable
+    -- Colisión
     if jugador.x < coleccionable.x + coleccionable.radio and
        jugador.x + jugador.ancho > coleccionable.x - coleccionable.radio and
        jugador.y < coleccionable.y + coleccionable.radio and
@@ -78,7 +76,7 @@ function Recolectar.update(dt)
         end
     end
 
-    -- Colisión con enemigo (Derrota)
+    -- Colisión con enemigo
     if jugador.x < enemigo.x + enemigo.ancho and
        jugador.x + jugador.ancho > enemigo.x and
        jugador.y < enemigo.y + enemigo.alto and
@@ -96,13 +94,13 @@ function Recolectar.mousepressed(x, y, button)
         local ang = math.atan2(y - cy, x - cx)
         table.insert(balas, { x = cx, y = cy, vx = math.cos(ang) * 500, vy = math.sin(ang) * 500, radio = 4 })
     elseif (estadoJuego == "ganado" or estadoJuego == "perdido") and button == 1 then
-        -- 1. Botón REINICIAR (Verde: Y entre 320 y 370)
+        -- 1. Botón REINICIAR
         if x >= 300 and x <= 500 and y >= 320 and y <= 370 then
             Recolectar.enter()
-        -- 2. Botón VOLVER (Azul / Celeste: Y entre 390 y 440)
+        -- 2. Botón VOLVER
         elseif x >= 300 and x <= 500 and y >= 390 and y <= 440 then
             Recolectar.volverMenu = true
-        -- 3. Botón SALIR (Rojo: Y entre 460 y 510)
+        -- 3. Botón SALIR
         elseif x >= 300 and x <= 500 and y >= 460 and y <= 510 then
             love.event.quit()
         end
@@ -158,19 +156,19 @@ function Recolectar.draw()
         love.graphics.setColor(1, 1, 1)
         love.graphics.printf("Puntuación Final: " .. puntuacion .. " / " .. objetivoPuntos, 0, 220, 800, "center")
 
-        -- 1. Botón REINICIAR (Verde)
+        -- 1. Botón REINICIAR
         love.graphics.setColor(0.1, 0.7, 0.2)
         love.graphics.rectangle("fill", 300, 320, 200, 45, 8, 8)
         love.graphics.setColor(1, 1, 1)
         love.graphics.printf("REINICIAR", 300, 333, 200, "center")
 
-        -- 2. Botón VOLVER (Azul / Celeste)
+        -- 2. Botón VOLVER
         love.graphics.setColor(0.1, 0.5, 0.8)
         love.graphics.rectangle("fill", 300, 390, 200, 45, 8, 8)
         love.graphics.setColor(1, 1, 1)
         love.graphics.printf("VOLVER", 300, 403, 200, "center")
 
-        -- 3. Botón SALIR (Rojo)
+        -- 3. Botón SALIR
         love.graphics.setColor(0.8, 0.2, 0.2)
         love.graphics.rectangle("fill", 300, 460, 200, 45, 8, 8)
         love.graphics.setColor(1, 1, 1)
